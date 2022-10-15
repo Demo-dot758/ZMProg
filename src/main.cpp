@@ -4,8 +4,11 @@
 #include "Interp4Command.hh"
 #include "MobileObj.hh"
 
+#define LINE_SIZE 500
+
 using namespace std;
 
+bool ActivatePreprocessor(char *File);
 
 int main()
 {
@@ -40,4 +43,27 @@ int main()
   delete pCmd;
 
   dlclose(pLibHnd_Move);
+}
+
+
+bool ExecPreprocesor(const char * NazwaPliku, istringstream &IStrm4Cmds )
+{
+string Cmd4Preproc = "cpp -P";
+char Line[LINE_SIZE];
+ostringstream OTmpStrm;
+Cmd4Preproc += NazwaPliku;
+FILE* pProc = popen(Cmd4Preproc.c str(),"r");
+
+if (!pProc)
+{
+  return false;
+}
+
+while (fgets(Line,LINE_SIZE,pProc)) 
+{
+  OTmpStrm << Line;
+}
+IStrm4Cmds.str(OTmpStrm.str());
+
+return pclose(pProc) == 0;
 }
