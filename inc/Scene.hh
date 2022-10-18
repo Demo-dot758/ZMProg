@@ -15,7 +15,7 @@
 class Scene
 {
     public:
-        void _Set_MobileObjs(std::map<std::string,std::shared_ptr<MobileObj>>);
+        std::map<std::string,std::shared_ptr<MobileObj>> Set_MobileObjs();
         std::shared_ptr<MobileObj> FindMobileObj(const char *sObjName);
         std::shared_ptr<MobileObj> FindMobileObj(const std::string & rObjName);
         void AddMobileObj(MobileObj *pMobObj);

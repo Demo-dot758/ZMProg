@@ -1,6 +1,8 @@
 #include <iostream>
 #include <dlfcn.h>
 #include <cassert>
+#include <sstream>
+#include <cstdio>
 #include "Interp4Command.hh"
 #include "MobileObj.hh"
 
@@ -8,20 +10,22 @@
 
 using namespace std;
 
-bool ActivatePreprocessor(char *File);
+
+bool ExecPreprocesor(const char * NazwaPliku, istringstream &IStrm4Cmds );
 
 int main()
 {
   void *pLibHnd_Move = dlopen("libInterp4Move.so",RTLD_LAZY);
   Interp4Command *(*pCreateCmd_Move)(void);
   void *pFun;
+  istringstream iStrm;
 
   if (!pLibHnd_Move) {
     cerr << "!!! Brak biblioteki: Interp4Move.so" << endl;
     return 1;
   }
 
-
+  // ExecPreprocesor("plik", iStrm);
   pFun = dlsym(pLibHnd_Move,"CreateCmd");
   if (!pFun) {
     cerr << "!!! Nie znaleziono funkcji CreateCmd" << endl;
@@ -52,7 +56,7 @@ string Cmd4Preproc = "cpp -P";
 char Line[LINE_SIZE];
 ostringstream OTmpStrm;
 Cmd4Preproc += NazwaPliku;
-FILE* pProc = popen(Cmd4Preproc.c str(),"r");
+FILE* pProc = popen(Cmd4Preproc.c_str(),"r");
 
 if (!pProc)
 {
