@@ -12,7 +12,9 @@
 
 class Set4LibInterfaces
 {
-
+    public:
+        Set4LibInterfaces();
+        
 };
 
 
