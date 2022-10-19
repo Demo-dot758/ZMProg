@@ -20,12 +20,13 @@
 
 class LibInterface
 {
-    public:
+    private:
         void * LibHandler;
         std::string CmdName;
-
+    public:
+        bool LoadLib(std::string path);
         Interp4Command *(*pCreateCmd)(void);
-        LibInterface(std::string path);
+        LibInterface();
         ~LibInterface() {dlclose(LibHandler);}
 };
 

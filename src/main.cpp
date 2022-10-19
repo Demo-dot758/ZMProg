@@ -16,7 +16,11 @@ bool ExecPreprocesor(const char * NazwaPliku, istringstream &IStrm4Cmds );
 
 int main()
 {
-  LibInterface move("libInterp4Move.so");
+  LibInterface move;
+  move.LoadLib("libInterp4Move.so");
+
+  LibInterface rotate;
+  rotate.LoadLib("libInterp4Rotate.so");
 }
 
 bool ExecPreprocesor(const char * NazwaPliku, istringstream &IStrm4Cmds )
