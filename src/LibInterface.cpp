@@ -10,7 +10,7 @@ LibInterface::LibInterface(std::string path)
     }
     else
     {
-        std::cout << "Znaleziono biblioteke" << path <<std::endl;
+        std::cout << "Znaleziono biblioteke: " << path <<std::endl;
     }
 
     void *pFun;
@@ -20,7 +20,7 @@ LibInterface::LibInterface(std::string path)
         std::cerr << "!!! Nie znaleziono funkcji CreateCmd" << std::endl;
     }
 
-    pCreateCmd = *reinterpret_cast<Interp4Command* (*)(void)>(&pFun);
+    pCreateCmd = *reinterpret_cast<Interp4Command* (**)(void)>(&pFun);
 
     Interp4Command *pCmd = pCreateCmd();
 
