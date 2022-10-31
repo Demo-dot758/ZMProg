@@ -1,5 +1,5 @@
-#ifndef  COMMAND4ROTATE_HH
-#define  COMMAND4ROTATE_HH
+#ifndef  COMMAND4SET_HH
+#define  COMMAND4SET_HH
 
 #ifndef __GNUG__
 # pragma interface
@@ -20,7 +20,7 @@
  *
  *  Klasa modeluje ...
  */
-class Interp4Rotate: public Interp4Command 
+class Interp4Set: public Interp4Command 
 {
   /*
    *  Tu należy zdefiniować pola, które są niezbędne
@@ -28,14 +28,15 @@ class Interp4Rotate: public Interp4Command
    *  Ponieżej zdefiniowane jest tylko jedno pole jako przykład.
    */
   private:
-    double Angular_Speed;
-    std::string Name;
-    double Angle;
+    double  Wsp_x;
+    double  Wsp_y;
+    double  Angle_Oz;
+    std::string Obj_Name;
   public:
     /*!
     * \brief
     */
-    Interp4Rotate();  
+    Interp4Set();  
     /*!
     * \brief Wyświetla postać bieżącego polecenia (nazwę oraz wartości parametrów)
     */

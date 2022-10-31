@@ -70,10 +70,8 @@ bool Interp4Pause::ExecCmd( MobileObj  *pMobObj,  int  Socket) const
  */
 bool Interp4Pause::ReadParams(std::istream& Strm_CmdsList)
 {
-  /*
-   *  Tu trzeba napisać odpowiedni kod.
-   */
-  return true;
+  Strm_CmdsList >> Name >> Pause_time;
+  return !Strm_CmdsList.fail();
 }
 
 
@@ -91,5 +89,5 @@ Interp4Command* Interp4Pause::CreateCmd()
  */
 void Interp4Pause::PrintSyntax() const
 {
-  cout << "   Pause  NazwaObiektu  CzasPauzy[s]" << endl;
+  cout << "   Pause CzasPauzy[s]" << endl;
 }

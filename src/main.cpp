@@ -6,6 +6,7 @@
 #include "Interp4Command.hh"
 #include "MobileObj.hh"
 #include "LibInterface.hh"
+#include "Set4LibInterfaces.hh"
 
 #define LINE_SIZE 500
 
@@ -16,11 +17,7 @@ bool ExecPreprocesor(const char * NazwaPliku, istringstream &IStrm4Cmds );
 
 int main()
 {
-  LibInterface move;
-  move.LoadLib("libInterp4Move.so");
-
-  LibInterface rotate;
-  rotate.LoadLib("libInterp4Rotate.so");
+  Set4LibInterfaces LibList;
 }
 
 bool ExecPreprocesor(const char * NazwaPliku, istringstream &IStrm4Cmds )

@@ -1,17 +1,12 @@
 #include "LibInterface.hh"
 
-LibInterface::LibInterface()
-{
-}
-
-bool LibInterface::LoadLib(std::string path)
+LibInterface::LibInterface(std::string path)
 {
     LibHandler = dlopen(path.c_str(),RTLD_LAZY);
 
     if (!LibHandler) 
     {
         std::cerr << "!!! Brak biblioteki: " << path << std::endl;
-        return false;
     }
     else
     {
@@ -23,7 +18,6 @@ bool LibInterface::LoadLib(std::string path)
     if (!pFun) 
     {
         std::cerr << "!!! Nie znaleziono funkcji CreateCmd" << std::endl;
-        return false;
     }
 
     pCreateCmd = *reinterpret_cast<Interp4Command* (**)(void)>(&pFun);
@@ -39,5 +33,4 @@ bool LibInterface::LoadLib(std::string path)
     std::cout << std::endl;
 
     delete pCmd;
-    return true;
 }

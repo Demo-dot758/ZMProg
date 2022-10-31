@@ -37,9 +37,6 @@ Interp4Move::Interp4Move(): _Speed_mmS(0), Name("Move"), Length(10)
  */
 void Interp4Move::PrintCmd() const
 {
-  /*
-   *  Tu trzeba napisać odpowiednio zmodyfikować kod poniżej.
-   */
   cout << GetCmdName() << " " << Name  << " " << _Speed_mmS << " " << Length << endl;
 }
 
@@ -70,10 +67,8 @@ bool Interp4Move::ExecCmd( MobileObj  *pMobObj,  int  Socket) const
  */
 bool Interp4Move::ReadParams(std::istream& Strm_CmdsList)
 {
-  /*
-   *  Tu trzeba napisać odpowiedni kod.
-   */
-  return true;
+  Strm_CmdsList >> Name >> _Speed_mmS >> Length;
+  return !Strm_CmdsList.fail();
 }
 
 
