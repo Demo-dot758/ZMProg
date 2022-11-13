@@ -29,7 +29,7 @@ Interp4Command* CreateCmd(void)
 /*!
  *
  */
-Interp4Rotate::Interp4Rotate(): Speed(0)
+Interp4Rotate::Interp4Rotate(): Angular_Speed(0), Angle(0)
 {}
 
 
@@ -41,7 +41,7 @@ void Interp4Rotate::PrintCmd() const
   /*
    *  Tu trzeba napisać odpowiednio zmodyfikować kod poniżej.
    */
-  cout << GetCmdName() << " " << Name  << " " << Speed  << " " << " " << Angle  << endl;
+  cout << GetCmdName() << " " << Name  << " " << Angular_Speed  << " " << Angle  << endl;
 }
 
 
@@ -71,10 +71,8 @@ bool Interp4Rotate::ExecCmd( MobileObj  *pMobObj,  int  Socket) const
  */
 bool Interp4Rotate::ReadParams(std::istream& Strm_CmdsList)
 {
-  /*
-   *  Tu trzeba napisać odpowiedni kod.
-   */
-  return true;
+  Strm_CmdsList >> Name >> Angular_Speed >> Angle;
+  return !Strm_CmdsList.fail();
 }
 
 
