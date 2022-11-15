@@ -34,3 +34,4 @@ LibInterface::LibInterface(std::string path)
 
     delete pCmd;
 }
+

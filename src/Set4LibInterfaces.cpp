@@ -10,6 +10,6 @@ Set4LibInterfaces::Set4LibInterfaces(){
 }
 
 void Set4LibInterfaces::LoadLib(std::string path){
-    auto Libpointer = std::make_shared<LibInterface>(path);
+    std::shared_ptr Libpointer = std::make_shared<LibInterface>(path);
     LibMap.insert({Libpointer->CmdName, Libpointer});
 }

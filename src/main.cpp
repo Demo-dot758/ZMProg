@@ -14,6 +14,7 @@ using namespace std;
 
 
 bool ExecPreprocesor(const char * NazwaPliku, istringstream &IStrm4Cmds );
+bool ReadCommands(istream &Strm, Set4LibInterfaces &LibList);
 
 int main()
 {
@@ -23,6 +24,8 @@ int main()
   ExecPreprocesor("opis_dzialan.cmd", iStrm);  
 
   cout << iStrm.str() << endl;
+
+  ReadCommands(iStrm, LibList);
 }
 
 bool ExecPreprocesor(const char * NazwaPliku, istringstream &IStrm4Cmds )
@@ -45,4 +48,33 @@ while (fgets(Line,LINE_SIZE,pProc))
 IStrm4Cmds.str(OTmpStrm.str());
 
 return pclose(pProc) == 0;
+}
+
+bool ReadCommands(istream &Strm, Set4LibInterfaces &LibList) 
+{
+  std::string cmdName;
+
+  while (Strm >> cmdName) // sprawdza, czy w strumieniu jest jeszcze jakaś komenda
+  {
+    std::map <std::string, std::shared_ptr<LibInterface>>::iterator iter = LibList.FindLib(cmdName);
+    if (iter == LibList.EndMap()) 
+    {
+      std::cerr << "Komenda " << cmdName << " nie została odnaleziona" << std::endl;
+      return false;
+    }
+    // Tworzy komendę na podstawie funkcji wtyczki
+    Interp4Command * pCommand = iter->second->pCreateCmd();
+    if (!pCommand -> ReadParams(Strm)) 
+    {
+      std::cerr << "!!! Nieporawne parametry dla komendy '" << cmdName << std::endl;
+      delete pCommand;
+      return false;
+    }
+      cout << "Parametry:" << endl;
+      pCommand -> PrintCmd();
+      cout << endl;
+
+      delete pCommand;
+  }
+  return true;
 }

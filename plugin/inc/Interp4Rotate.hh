@@ -28,8 +28,8 @@ class Interp4Rotate: public Interp4Command
    *  Ponieżej zdefiniowane jest tylko jedno pole jako przykład.
    */
   private:
-    double Angular_Speed;
     std::string Name;
+    double Angular_Speed;
     double Angle;
   public:
     /*!
