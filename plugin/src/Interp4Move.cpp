@@ -28,7 +28,7 @@ Interp4Command* CreateCmd(void)
 /*!
  *
  */
-Interp4Move::Interp4Move(): _Speed_mmS(0), Name("Move"), Length(10)
+Interp4Move::Interp4Move(): _Speed_mmS(0), Name("Move"), Length(0)
 {}
 
 

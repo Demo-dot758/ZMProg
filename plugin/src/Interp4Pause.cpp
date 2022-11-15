@@ -28,7 +28,7 @@ Interp4Command* CreateCmd(void)
 /*!
  *
  */
-Interp4Pause::Interp4Pause(): Name("Pause"), Pause_time(10)
+Interp4Pause::Interp4Pause(): Name("Pause"), Pause_time(0)
 {}
 
 
@@ -89,5 +89,5 @@ Interp4Command* Interp4Pause::CreateCmd()
  */
 void Interp4Pause::PrintSyntax() const
 {
-  cout << "   Pause CzasPauzy[s]" << endl;
+  cout << "   Pause CzasPauzy[ms]" << endl;
 }
