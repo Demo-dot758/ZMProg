@@ -18,11 +18,16 @@ bool ExecPreprocesor(const char * NazwaPliku, istringstream &IStrm4Cmds );
 int main()
 {
   Set4LibInterfaces LibList;
+  istringstream iStrm;
+
+  ExecPreprocesor("opis_dzialan.cmd", iStrm);  
+
+  cout << iStrm.str() << endl;
 }
 
 bool ExecPreprocesor(const char * NazwaPliku, istringstream &IStrm4Cmds )
 {
-string Cmd4Preproc = "cpp -P";
+string Cmd4Preproc = "cpp -P ";
 char Line[LINE_SIZE];
 ostringstream OTmpStrm;
 Cmd4Preproc += NazwaPliku;
