@@ -29,7 +29,7 @@ Interp4Command* CreateCmd(void)
 /*!
  *
  */
-Interp4Rotate::Interp4Rotate(): Angular_Speed(0), Angle(0)
+Interp4Rotate::Interp4Rotate(): Name("Name"), Angular_Speed(0), Angle(0)
 {}
 
 
