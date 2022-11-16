@@ -24,14 +24,6 @@ LibInterface::LibInterface(std::string path)
 
     Interp4Command *pCmd = pCreateCmd();
 
-    std::cout << std::endl;
-    std::cout << pCmd->GetCmdName() << std::endl;
-    std::cout << std::endl;
-    pCmd->PrintSyntax();
-    std::cout << std::endl;
-    pCmd->PrintCmd();
-    std::cout << std::endl;
-
-    delete pCmd;
+    CmdName = pCmd->GetCmdName();
 }
 

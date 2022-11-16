@@ -23,7 +23,7 @@ int main()
 
   ExecPreprocesor("opis_dzialan.cmd", iStrm);  
 
-  cout << iStrm.str() << endl;
+  // cout << iStrm.str() << endl;
 
   ReadCommands(iStrm, LibList);
 }
@@ -56,8 +56,8 @@ bool ReadCommands(istream &Strm, Set4LibInterfaces &LibList)
 
   while (Strm >> cmdName) // sprawdza, czy w strumieniu jest jeszcze jakaś komenda
   {
-    std::map <std::string, std::shared_ptr<LibInterface>>::iterator iter = LibList.FindLib(cmdName);
-    if (iter == LibList.EndMap()) 
+    std::map <std::string, std::shared_ptr<LibInterface>>::iterator iter = LibList.LibMap.find(cmdName);
+    if (iter == LibList.LibMap.end()) 
     {
       std::cerr << "Komenda " << cmdName << " nie została odnaleziona" << std::endl;
       return false;
