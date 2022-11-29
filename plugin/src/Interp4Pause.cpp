@@ -56,7 +56,7 @@ const char* Interp4Pause::GetCmdName() const
 /*!
  *
  */
-bool Interp4Pause::ExecCmd( MobileObj  *pMobObj,  int  Socket) const
+bool Interp4Pause::ExecCmd( Scene *pScene,  int  Socket) const
 {
   /*
    *  Tu trzeba napisać odpowiedni kod.

@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Interp4Move.hh"
 #include "MobileObj.hh"
+#include "Scene.hh"
 
 using std::cout;
 using std::endl;
@@ -53,7 +54,7 @@ const char* Interp4Move::GetCmdName() const
 /*!
  *
  */
-bool Interp4Move::ExecCmd( MobileObj  *pMobObj,  int  Socket) const
+bool Interp4Move::ExecCmd(Scene  *pScene,  int  Socket) const
 {
   /*
    *  Tu trzeba napisać odpowiedni kod.
