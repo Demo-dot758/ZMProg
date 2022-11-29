@@ -23,7 +23,7 @@ LDFLAGS=-Wall
 
 
 interp: obj/main.o obj/LibInterface.o obj/Set4LibInterfaces.o obj/xmlinterp.o obj/Configuration.o obj/Scene.o obj/Sender.o
-	g++ ${LDFLAGS} -o interp  obj/main.o obj/LibInterface.o obj/Set4LibInterfaces.o obj/xmlinterp.ov ojb/Configuration.o obj/Scene.o obj/Sender.o -ldl -lxerces-c -lpthread
+	g++ ${LDFLAGS} -o interp  obj/main.o obj/LibInterface.o obj/Set4LibInterfaces.o obj/xmlinterp.o obj/Configuration.o obj/Scene.o obj/Sender.o -ldl -lxerces-c -lpthread
 
 obj/main.o: src/main.cpp inc/Interp4Command.hh inc/xmlinterp.hh
 	g++ -c ${CPPFLAGS} -o obj/main.o src/main.cpp

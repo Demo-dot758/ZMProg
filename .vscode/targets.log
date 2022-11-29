@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Nov 29 10:44:48 2022
+# Make data base, printed on Tue Nov 29 23:24:56 2022
 
 # Variables
 
@@ -53,7 +53,7 @@ PATH = /home/demo/.vscode-server/bin/6261075646f055b99068d3688932416f2346dd3b/bi
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-0697573c-8d82-4f27-8d1f-443e1bbe7472.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-667e181c-43d5-4ebd-b3d6-73e46733ff06.sock
 # makefile (from 'Makefile', line 20)
 LDFLAGS = -Wall
 # default
@@ -142,10 +142,8 @@ LANG = C
 TERM = xterm-256color
 # environment
 WSL_DISTRO_NAME = Ubuntu
-# environment
-MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=66/1024=6%, Rehash=0, Collisions=4/91=4%
+# Load=65/1024=6%, Rehash=0, Collisions=4/90=4%
 
 # Pattern-specific Variable Values
 
@@ -153,9 +151,9 @@ MOTD_SHOWN = update-motd
 
 # Directories
 
-# . (device 2064, inode 105984): 15 files, no impossibilities.
+# . (device 2064, inode 105984): 16 files, no impossibilities.
 
-# 15 files, no impossibilities in 1 directories.
+# 16 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -245,7 +243,7 @@ clean_plugin:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-11-29 10:43:52.2887484
+#  Last modified 2022-11-29 18:52:50.7355335
 #  File has been updated.
 #  Successfully updated.
 
@@ -274,7 +272,6 @@ help:
 	@echo "          kompilacje i uruchomienie programu."
 	@echo "  clean    - usuwa produkty kompilacji oraz program"
 	@echo "  clean_plugin - usuwa plugin"
- 
 	@echo "  cleanall - wykonuje wszystkie operacje dla podcelu clean oraz clean_plugin"
 	@echo "             oprocz tego usuwa wszystkie kopie (pliki, ktorych nazwa "
 	@echo "             konczy sie znakiem ~)."
@@ -285,6 +282,7 @@ help:
 	@echo "  make clean     # usuwa produkty kompilacji."
 	@echo
 
+ 
 # Not a target:
 src/Set4LibInterfaces.cpp:
 #  Implicit rule search has not been done.
@@ -419,7 +417,7 @@ interp: obj/main.o obj/LibInterface.o obj/Set4LibInterfaces.o obj/xmlinterp.o ob
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 26):
-	g++ ${LDFLAGS} -o interp  obj/main.o obj/LibInterface.o obj/Set4LibInterfaces.o obj/xmlinterp.ov ojb/Configuration.o obj/Scene.o obj/Sender.o -ldl -lxerces-c -lpthread
+	g++ ${LDFLAGS} -o interp  obj/main.o obj/LibInterface.o obj/Set4LibInterfaces.o obj/xmlinterp.o obj/Configuration.o obj/Scene.o obj/Sender.o -ldl -lxerces-c -lpthread
 
 # files hash-table stats:
 # Load=37/1024=4%, Rehash=0, Collisions=2/88=2%
@@ -432,9 +430,9 @@ interp: obj/main.o obj/LibInterface.o obj/Set4LibInterfaces.o obj/xmlinterp.o ob
 # strcache buffers: 1 (0) / strings = 52 / storage = 664 B / avg = 12 B
 # current buf: size = 8162 B / used = 664 B / count = 52 / avg = 12 B
 
-# strcache performance: lookups = 86 / hit rate = 39%
+# strcache performance: lookups = 87 / hit rate = 40%
 # hash-table stats:
-# Load=52/8192=1%, Rehash=0, Collisions=1/86=1%
-# Finished Make data base on Tue Nov 29 10:44:48 2022
+# Load=52/8192=1%, Rehash=0, Collisions=1/87=1%
+# Finished Make data base on Tue Nov 29 23:24:56 2022
 
  

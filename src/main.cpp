@@ -8,6 +8,8 @@
 #include "LibInterface.hh"
 #include "Set4LibInterfaces.hh"
 #include "xmlinterp.hh"
+#include "Configuration.hh"
+#include "Sender.hh"
 
 #include <xercesc/sax2/SAX2XMLReader.hpp>
 #include <xercesc/sax2/XMLReaderFactory.hpp>
@@ -22,93 +24,116 @@ using namespace xercesc;
 
 
 bool ExecPreprocesor(const char * NazwaPliku, istringstream &IStrm4Cmds );
-bool ReadCommands(istream &Strm, Set4LibInterfaces &LibList);
+bool ReadCommands(istream &Strm, Set4LibInterfaces &LibList,  Scene *ProgramScene);
 bool ReadFile(const char* sFileName, Configuration &rConfig);
 
 int main()
 {
   Set4LibInterfaces LibList;
+  Configuration Config;
+  ListOfLibs ConfigLibList;
+  ListOfMobileObj MobileObjList;
+  Scene *ProgramScene;
+  Sender *ProgramSender;
+
+
+
+  // Wczytywanie pliku XML
+  if (!ReadFile("plik.xml",Config))
+  {
+    cout << "Wczytywanie pliku konfiguracji config/config.xml nie powiodło się" << endl;
+    return 1;
+  }
+
+  ConfigLibList = Config.GetLibList();
+  for (int i = 0; i < ConfigLibList.size(); i++)
+  {
+    LibList.LoadLib(ConfigLibList.at(i));
+  }
+
+  MobileObjList = Config.GetObjList();
+
+  ProgramScene = new Scene(MobileObjList);
+  ProgramScene->Print();
+
   istringstream iStrm;
-
   ExecPreprocesor("opis_dzialan.cmd", iStrm);  
+  ReadCommands(iStrm, LibList, ProgramScene);
 
-  ReadCommands(iStrm, LibList);
+  ProgramScene->Print();
 
-  //  Configuration   Config;
+//     cout << "Port: " << PORT << endl;
+//     Scene               Scn;
+//     int                 Socket4Sending;   
 
-  //  if (!ReadFile("config/config.xml",Config)) return 1;
-//   cout << "Port: " << PORT << endl;
-//   Scene               Scn;
-//   int                 Socket4Sending;   
+//     if (!OpenConnection(Socket4Sending)) return 1;
+    
+//     Sender   ClientSender(Socket4Sending,&Scn);
+//     //  thread   Thread4Sending(Fun_Sender, Socket4Sending, &ClientSender);
 
-//   if (!OpenConnection(Socket4Sending)) return 1;
-  
-//   Sender   ClientSender(Socket4Sending,&Scn);
-//   //  thread   Thread4Sending(Fun_Sender, Socket4Sending, &ClientSender);
-
-//   thread   Thread4Sending(Fun_CommunicationThread,&ClientSender);
-//   const char *sConfigCmds =
-// "Clear\n"
-// "AddObj Name=Podstawa1 RGB=(20,200,200) Scale=(4,2,1) Shift=(0.5,0,0) RotXYZ_deg=(0,-45,20) Trans_m=(-1,3,0)\n"
-// "AddObj Name=Podstawa1.Ramie1 RGB=(200,0,0) Scale=(3,3,1) Shift=(0.5,0,0) RotXYZ_deg=(0,-45,0) Trans_m=(4,0,0)\n"
-// "AddObj Name=Podstawa1.Ramie1.Ramie2 RGB=(100,200,0) Scale=(2,2,1) Shift=(0.5,0,0) RotXYZ_deg=(0,-45,0) Trans_m=(3,0,0)\n"       
-// "AddObj Name=Podstawa2 RGB=(20,200,200) Scale=(4,2,1) Shift=(0.5,0,0) RotXYZ_deg=(0,-45,0) Trans_m=(-1,-3,0)\n"
-// "AddObj Name=Podstawa2.Ramie1 RGB=(200,0,0) Scale=(3,3,1) Shift=(0.5,0,0) RotXYZ_deg=(0,-45,0) Trans_m=(4,0,0)\n"
-// "AddObj Name=Podstawa2.Ramie1.Ramie2 RGB=(100,200,0) Scale=(2,2,1) Shift=(0.5,0,0) RotXYZ_deg=(0,-45,0) Trans_m=(3,0,0)\n";
+//     thread   Thread4Sending(Fun_CommunicationThread,&ClientSender);
+//     const char *sConfigCmds =
+//     "Clear\n"
+//     "AddObj Name=Podstawa1 RGB=(20,200,200) Scale=(4,2,1) Shift=(0.5,0,0) RotXYZ_deg=(0,-45,20) Trans_m=(-1,3,0)\n"
+//     "AddObj Name=Podstawa1.Ramie1 RGB=(200,0,0) Scale=(3,3,1) Shift=(0.5,0,0) RotXYZ_deg=(0,-45,0) Trans_m=(4,0,0)\n"
+//     "AddObj Name=Podstawa1.Ramie1.Ramie2 RGB=(100,200,0) Scale=(2,2,1) Shift=(0.5,0,0) RotXYZ_deg=(0,-45,0) Trans_m=(3,0,0)\n"       
+//     "AddObj Name=Podstawa2 RGB=(20,200,200) Scale=(4,2,1) Shift=(0.5,0,0) RotXYZ_deg=(0,-45,0) Trans_m=(-1,-3,0)\n"
+//     "AddObj Name=Podstawa2.Ramie1 RGB=(200,0,0) Scale=(3,3,1) Shift=(0.5,0,0) RotXYZ_deg=(0,-45,0) Trans_m=(4,0,0)\n"
+//     "AddObj Name=Podstawa2.Ramie1.Ramie2 RGB=(100,200,0) Scale=(2,2,1) Shift=(0.5,0,0) RotXYZ_deg=(0,-45,0) Trans_m=(3,0,0)\n";
 
 
-//   cout << "Konfiguracja:" << endl;
-//   cout << sConfigCmds << endl;
-  
-//   Send(Socket4Sending,sConfigCmds);
-  
+//     cout << "Konfiguracja:" << endl;
+//     cout << sConfigCmds << endl;
+    
+//     Send(Socket4Sending,sConfigCmds);
+    
 
-//   cout << "Akcja:" << endl;    
-//   for (GeomObject &rObj : Scn._Container4Objects) {
-//     usleep(20000);
-//     ChangeState(Scn);
-//     Scn.MarkChange();
+//     cout << "Akcja:" << endl;    
+//     for (GeomObject &rObj : Scn._Container4Objects) {
+//       usleep(20000);
+//       ChangeState(Scn);
+//       Scn.MarkChange();
+//       usleep(100000);
+//     }
 //     usleep(100000);
-//   }
-//   usleep(100000);
 
-//   //-------------------------------------
-//   // Należy pamiętać o zamknięciu połączenia.
-//   // Bez tego serwer nie będzie reagował na
-//   // nowe połączenia.
-//   //
-//   cout << "Close\n" << endl; // To tylko, aby pokazac wysylana instrukcje
-//   Send(Socket4Sending,"Close\n");
-//   ClientSender.CancelCountinueLooping();
-//   Thread4Sending.join();
-//   close(Socket4Sending);
+//     //-------------------------------------
+//     // Należy pamiętać o zamknięciu połączenia.
+//     // Bez tego serwer nie będzie reagował na
+//     // nowe połączenia.
+//     //
+//     cout << "Close\n" << endl; // To tylko, aby pokazac wysylana instrukcje
+//     Send(Socket4Sending,"Close\n");
+//     ClientSender.CancelCountinueLooping();
+//     Thread4Sending.join();
+//     close(Socket4Sending);
 }
 
 bool ExecPreprocesor(const char * NazwaPliku, istringstream &IStrm4Cmds )
 {
-string Cmd4Preproc = "cpp -P ";
-char Line[LINE_SIZE];
-ostringstream OTmpStrm;
-Cmd4Preproc += NazwaPliku;
-FILE* pProc = popen(Cmd4Preproc.c_str(),"r");
+  string Cmd4Preproc = "cpp -P ";
+  char Line[LINE_SIZE];
+  ostringstream OTmpStrm;
+  Cmd4Preproc += NazwaPliku;
+  FILE* pProc = popen(Cmd4Preproc.c_str(),"r");
 
-if (!pProc)
-{
-  return false;
+  if (!pProc)
+  {
+    return false;
+  }
+
+  while (fgets(Line,LINE_SIZE,pProc)) 
+  {
+    OTmpStrm << Line;
+  }
+  IStrm4Cmds.str(OTmpStrm.str());
+
+  return pclose(pProc) == 0;
 }
 
-while (fgets(Line,LINE_SIZE,pProc)) 
+bool ReadCommands(istream &Strm, Set4LibInterfaces &LibList, Scene *ProgramScene) 
 {
-  OTmpStrm << Line;
-}
-IStrm4Cmds.str(OTmpStrm.str());
-
-return pclose(pProc) == 0;
-}
-
-bool ReadCommands(istream &Strm, Set4LibInterfaces &LibList) 
-{
-  std::string cmdName;
+  std::string cmdName, objName;
 
   while (Strm >> cmdName) // sprawdza, czy w strumieniu jest jeszcze jakaś komenda
   {
@@ -126,6 +151,13 @@ bool ReadCommands(istream &Strm, Set4LibInterfaces &LibList)
       delete pCommand;
       return false;
     }
+    objName = pCommand->GetObjName();
+    if (!ProgramScene->IfMobileObjectExists(objName))
+    {
+      cerr << "Obiekt o nazwie '" << objName << "' nie istnieje" << endl;
+      return false;
+    }
+    auto object_ptr(ProgramScene->FindMobileObj(objName));
     cout << "Parametry "  << cmdName << ":" << endl;
     pCommand -> PrintCmd();
     // pCommand -> ReadParams(cmdName);
@@ -148,7 +180,7 @@ bool ReadFile(const char* sFileName, Configuration &rConfig)
 {
   try 
   {
-          XMLPlatformUtils::Initialize();
+    XMLPlatformUtils::Initialize();
   }
   catch (const XMLException& toCatch) 
   {

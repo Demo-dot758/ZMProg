@@ -1,22 +1,28 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/demo/ZMProg'
+mkdir obj
+ 
 echo
 echo
 echo
 echo
 echo
  
-make: *** No rule to make target 'inc/xmlinterp.hh', needed by 'obj/main.o'.
-
+g++ -c -Wall -pedantic -std=c++17 -Iinc -o obj/main.o src/main.cpp
+ 
 g++ -c -Wall -pedantic -std=c++17 -Iinc -o obj/LibInterface.o src/LibInterface.cpp
  
 g++ -c -Wall -pedantic -std=c++17 -Iinc -o obj/Set4LibInterfaces.o src/Set4LibInterfaces.cpp
  
-make: *** No rule to make target 'src/Configuration.cpp', needed by 'obj/Configuration.o'.
-
-make: *** No rule to make target 'src/Scene.cpp', needed by 'obj/Scene.o'.
-
+g++ -c -Wall -pedantic -std=c++17 -Iinc -o obj/xmlinterp.o src/xmlinterp.cpp
+ 
+g++ -c -Wall -pedantic -std=c++17 -Iinc -o obj/Configuration.o src/Configuration.cpp
+ 
+g++ -c -Wall -pedantic -std=c++17 -Iinc -o obj/Scene.o src/Scene.cpp
+ 
 g++ -c -Wall -pedantic -std=c++17 -Iinc -o obj/Sender.o src/Sender.cpp  -lpthread
+g++ -Wall -o interp  obj/main.o obj/LibInterface.o obj/Set4LibInterfaces.o obj/xmlinterp.o obj/Configuration.o obj/Scene.o obj/Sender.o -ldl -lxerces-c -lpthread
 cd plugin; make
+export LD_LIBRARY_PATH="./libs"; ./interp
 make: Leaving directory '/home/demo/ZMProg'
  

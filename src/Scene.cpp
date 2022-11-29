@@ -1,17 +1,17 @@
 #include "Scene.hh"
 
-// void Scene::LoadMobObjects(ListMobileOb &ListMobileOb){
-//     MobileObjects = ListMobileOb;
-// }
-
-// void Scene::Print(){
-//     std::cout << "\n Istniejące obiekty mobilne: ";
-
-//     for(ListMobileOb::iterator i = MobileObjMap.begin(); i != MobileObjMap.end(); i++){
-//         std::cout << "\n \t" << i->first;
-//     }
-//     std::cout << endl;
-// }
+void Scene::Print()
+{
+    cout<<endl<<"Obiekty na scenie:\n";
+    for(ListOfMobileObj::iterator i = MobileObjMap.begin(); i!=MobileObjMap.end(); ++i)
+     {
+        cout<<"\t->\t"<<i->first<<":\t";
+        cout<<"Pos"<<i->second->GetPositoin_m();
+        cout<<"\tRPY("<<i->second->GetAng_Roll_deg()<<","
+        <<i->second->GetAng_Pitch_deg()<<","<<i->second->GetAng_Yaw_deg()<<")\n";
+     }   
+    cout<<endl<<endl;
+}
 
 std::shared_ptr<MobileObj> Scene::FindMobileObj(std::string name){
     auto iterator = MobileObjMap.find(name);
@@ -22,11 +22,12 @@ std::shared_ptr<MobileObj> Scene::FindMobileObj(std::string name){
     }
 }
 
-// bool Scene::ExistMobObjects(std::string name){
-//     auto iterator = MobileObjects.find(name);
-//     if(iterator == MobileObjects.end()){
-//         return false;
-//     }else{
-//         return true;
-//     }
-// }
+bool Scene::IfMobileObjectExists(string Name)
+{
+    auto It = MobileObjMap.find(Name);
+
+    if (It == MobileObjMap.end())
+        return false;
+    else    
+        return true;
+}

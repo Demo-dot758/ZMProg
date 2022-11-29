@@ -6,7 +6,8 @@
 #include "MobileObj.hh"
 #include <memory>
 #include <string>
-
+#include "AccessControl.hh"
+#include <vector>
 /*!
  * \file
  * \brief Definicja klasy Scene
@@ -14,25 +15,30 @@
  * Plik zawiera definicję klasy Scene ...
  */
 
+using namespace std;
 typedef std::map<std::string, std::shared_ptr<MobileObj>> ListOfMobileObj;
 
-class Scene
+class Scene : public AccessControl
 {
     private:
         ListOfMobileObj MobileObjMap;
     public:
-        Scene(){};
+        std::vector<std::shared_ptr<MobileObj>> MobileObjectsList;
+        Scene(ListOfMobileObj MList){MobileObjMap=MList;};
         ~Scene(){};
         ListOfMobileObj GetMobileObjMap() {return MobileObjMap;};
         std::shared_ptr<MobileObj> FindMobileObj(std::string name);
-        void AddMobileObj(std::string objName, std::shared_ptr<MobileObj> pMobileObj);
-        void UpdateMobileObj();
+
         void Clear();
         void Close();
 
-        std::shared_ptr<MobileObj> FindMobileObj(const char *sObjName);
-        std::shared_ptr<MobileObj> FindMobileObj(const std::string & rObjName);
-        void AddMobileObj(MobileObj *pMobObj);
+        void Print();
+        bool IfMobileObjectExists(string Name);
+        void AddMobileObject(std::string Name)
+        {
+            std::shared_ptr<MobileObj> new_Ptr = std::make_shared<MobileObj>();
+            this->MobileObjMap.insert({Name, new_Ptr});
+        }
 
 };
 

@@ -148,7 +148,28 @@
 	* Udostępnia nazwę obiektu w trybie tylko do odczytu.
         */
        const std::string & GetName() const { return _Name; }
-    };
 
+        /*
+        * \brief Udostępnia kolejny zestaw poleceń umożliwiających
+        *        zespołu obiektu.
+        *
+        * Udostępnia kolejny zestaw poleceń umożliwiających
+        * zespołu obiektu. Ta metoda "udaje" metodę, która w oryginalnym
+        * rozwiązaniu powinna wygenerować odpowiednie polecenie na podstawie
+        * przechowywanej informacji o położeniu i orientacji obiektu.
+        */
+        std::string GetStateDesc()
+        {
+                char c_str[100];
+                
+                int len = sprintf(c_str, "Name=%s RotXYZ_deg=(%f,%f,%f) Trans_m=(%f, %f, %f)\n",
+                        _Name.c_str(),
+                        _Ang_Roll_deg, _Ang_Pitch_deg, _Ang_Yaw_deg,
+                        _Position_m[0], _Position_m[1], _Position_m[2]);
+        
+                std::string Str(c_str,len);
+                return Str;
+        }
+    };
 
 #endif

@@ -11,17 +11,22 @@ void Sender::Watching_and_Sending()
         }
         _pScn->LockAccess();
         
-        ListOfMobileObj MobileObjects = _pScn->GetMobObjects();
+        //Wczytywanie listy obiektów
+        ListOfMobileObj MobileObjects = _pScn->GetMobileObjMap();
 
-        ListMobileOb::iterator iterator;
-        //------- Przeglądanie tej kolekcji to uproszczony przykład
-        
-        for (const GeomObject &rObj : _pScn->_Container4Objects) 
+        //Wektor wskazników na obiekty mobilne
+        std::vector<std::shared_ptr<MobileObj>> ObjectsList;
+        ListOfMobileObj::iterator iterator;
+        for (iterator= MobileObjects.begin(); iterator != MobileObjects.end(); iterator++)
         {
-            // Ta instrukcja to tylko uproszczony przykład
-            cout << rObj.GetStateDesc();
-            Send(_Socket,rObj.GetStateDesc()); // Tu musi zostać wywołanie odpowiedniej
-            // metody/funkcji gerującej polecenia dla serwera.
+                ObjectsList.push_back(iterator->second);
+        }
+        
+        for (auto rObj : ObjectsList) 
+        {
+            std::string ObjState = rObj->GetStateDesc();
+            cout << "Send: " << ObjState;
+            Send(_Socket,ObjState.c_str());
         }
         
         _pScn->CancelChange();
@@ -46,28 +51,28 @@ int Send(int Sk2Server, const char *sMesg)
     return 0;
 }
 
-bool ChangeState(Scene &Scn)
-{
-  bool Changed;
+// bool ChangeState(Scene &Scn)
+// {
+//   bool Changed;
 
-  while (true) 
-  {
-    Scn.LockAccess(); // Zamykamy dostęp do sceny, gdy wykonujemy
-                            // modyfikacje na obiekcie.
-    for (GeomObject &rObj : Scn._Container4Objects) 
-    {
-        if (!(Changed = rObj.IncStateIndex())) 
-        {
-            Scn.UnlockAccess();
-            return false; 
-        }
-    }
-    Scn.MarkChange();
-    Scn.UnlockAccess();
-    usleep(300000);
-  }
-  return true;
-}
+//   while (true) 
+//   {
+//     Scn.LockAccess(); // Zamykamy dostęp do sceny, gdy wykonujemy
+//                             // modyfikacje na obiekcie.
+//     for (MobileObj &rObj : Scn.MobileObjectsList) 
+//     {
+//         if (!(Changed = rObj.IncStateIndex())) 
+//         {
+//             Scn.UnlockAccess();
+//             return false; 
+//         }
+//     }
+//     Scn.MarkChange();
+//     Scn.UnlockAccess();
+//     usleep(300000);
+//   }
+//   return true;
+// }
 
 bool OpenConnection(int &rSocket)
 {
