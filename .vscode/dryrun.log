@@ -1,0 +1,22 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory '/home/demo/ZMProg'
+echo
+echo
+echo
+echo
+echo
+ 
+make: *** No rule to make target 'inc/xmlinterp.hh', needed by 'obj/main.o'.
+
+g++ -c -Wall -pedantic -std=c++17 -Iinc -o obj/LibInterface.o src/LibInterface.cpp
+ 
+g++ -c -Wall -pedantic -std=c++17 -Iinc -o obj/Set4LibInterfaces.o src/Set4LibInterfaces.cpp
+ 
+make: *** No rule to make target 'src/Configuration.cpp', needed by 'obj/Configuration.o'.
+
+make: *** No rule to make target 'src/Scene.cpp', needed by 'obj/Scene.o'.
+
+g++ -c -Wall -pedantic -std=c++17 -Iinc -o obj/Sender.o src/Sender.cpp  -lpthread
+cd plugin; make
+make: Leaving directory '/home/demo/ZMProg'
+ 
