@@ -4,6 +4,7 @@
 #include <iostream>
 #include "MobileObj.hh"
 #include "Scene.hh"
+#include <string>
 
 /*!
  * \file
@@ -40,6 +41,9 @@
    /*!
     * \brief Wykonuje polecenie oraz wizualizuje jego realizację.
     */
+    
+   virtual std::string GetObjName() const = 0;
+
    virtual bool ExecCmd( Scene *pScene, int Socket ) const = 0;
    /*!
     * \brief Czyta wartości parametrów danego polecenia.

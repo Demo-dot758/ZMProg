@@ -39,9 +39,6 @@ void XMLInterp4Config::endDocument()
 }
 
 
-
-
-
 /*!
  * Analizuje atrybuty elementu XML \p "Lib" i odpowiednio je interpretuje.
  * \param[in] rAttrs - atrybuty elementu XML \p "Lib".
